@@ -4,17 +4,16 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import scale
 
-lojas_df = pd.read_csv("data/lojas_norm.csv")
-lojas_df.dropna(subset=['encrypted_5_zipcode','faturamento_total','produtos_vendidos'], inplace=True)
+df_pj = pd.read_csv("data/transacoes_pj.csv")
+df_pj.dateTime = pd.to_datetime(df_pj['dateTime'], errors='coerce')
 
-lojas_df.dropna(subset=['debito','credito'], inplace=True)
+df_pj.dropna(subset=['productTotal'], inplace=True)
+df_pj.dropna(subset=['cep'], inplace=True)
 
-Xdf = lojas_df[lojas_df.transacoes_total >= 0.005]
-
-X = np.column_stack([Xdf.encrypted_5_zipcode, Xdf.faturamento_total,Xdf.produtos_vendidos])
+X = np.column_stack([df_pj.cep, df_pj.productTotal])
 
 kmean = KMeans(init='k-means++', n_clusters=4)
 kmean.fit(X)
 c = kmean.predict(X)
 
-plt.scatter(X[:,0], X[:,2], c=c)
+plt.scatter(X[:,1], X[:,0], c=c)
