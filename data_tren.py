@@ -6,7 +6,7 @@ import re
 
 #%% carregar os dataframes
 print("carregando df lojas...")
-lojas_df = pd.read_csv("data/lojas.csv")
+lojas_df = pd.read_csv("data/stores_details.csv")
 print("carregando df transacoes...")
 trans_df = pd.read_csv("data/raw_part-00000.csv", error_bad_lines=False)
 for f in glob.glob("data/separados/*.{}".format("csv")):
