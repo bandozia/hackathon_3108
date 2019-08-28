@@ -38,13 +38,11 @@ clientes_df['periodo_4'] = clientes_df.cpf.apply(lambda x : count_sazon(x, per_4
 clientes_df.to_csv("data/clientes_pf.csv", index=False)
 
 lojas_df = pd.read_csv("data/lojas_enc.csv")
-#lojas_df.drop(['encrypted_domain','cnae'], axis=1, inplace=True)
-lojas_df.encrypted_5_zipcode = pd.to_numeric(lojas_df.encrypted_5_zipcode, errors='coerce')
-
-lojas_df.encrypted_5_zipcode = (lojas_df.encrypted_5_zipcode - lojas_df.encrypted_5_zipcode.min()) / (lojas_df.encrypted_5_zipcode.max() - lojas_df.encrypted_5_zipcode.min())
-lojas_df.produtos_vendidos = (lojas_df.produtos_vendidos - lojas_df.produtos_vendidos.min()) / (lojas_df.produtos_vendidos.max() - lojas_df.produtos_vendidos.min())
-lojas_df.faturamento_total = (lojas_df.faturamento_total - lojas_df.faturamento_total.min()) / (lojas_df.faturamento_total.max() - lojas_df.faturamento_total.min())
-lojas_df.transacoes_total = (lojas_df.transacoes_total - lojas_df.transacoes_total.min()) / (lojas_df.transacoes_total.max() - lojas_df.transacoes_total.min())
+#lojas_df.encrypted_5_zipcode = pd.to_numeric(lojas_df.encrypted_5_zipcode, errors='coerce')
+#lojas_df.encrypted_5_zipcode = (lojas_df.encrypted_5_zipcode - lojas_df.encrypted_5_zipcode.min()) / (lojas_df.encrypted_5_zipcode.max() - lojas_df.encrypted_5_zipcode.min())
+#lojas_df.produtos_vendidos = (lojas_df.produtos_vendidos - lojas_df.produtos_vendidos.min()) / (lojas_df.produtos_vendidos.max() - lojas_df.produtos_vendidos.min())
+#lojas_df.faturamento_total = (lojas_df.faturamento_total - lojas_df.faturamento_total.min()) / (lojas_df.faturamento_total.max() - lojas_df.faturamento_total.min())
+#lojas_df.transacoes_total = (lojas_df.transacoes_total - lojas_df.transacoes_total.min()) / (lojas_df.transacoes_total.max() - lojas_df.transacoes_total.min())
 
 ((lojas_df.dinheiro + lojas_df.debito + lojas_df.deposito + lojas_df.transferencia + lojas_df.credito + lojas_df.cheque + lojas_df.crediario) == 1).value_counts()
 
