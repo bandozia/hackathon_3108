@@ -37,7 +37,7 @@ reduced = pca.fit_transform(X)
 plt.style.use('default')
 plt.style.use('ggplot')
 plt.scatter(X[:,0], X[:,2], c=predicted, alpha=0.5)
-#plt.scatter(reduced[:,0], reduced[:,1], c=predicted)
+plt.scatter(reduced[:,0], reduced[:,1], c=predicted)
 plt.savefig("scatter.jpg")
 metrics.silhouette_score(X, predicted,metric='euclidean')
 
@@ -91,3 +91,10 @@ lojas_df['sazon_cluster'] = predicted
 lojas_df['ticket_medio'] = lojas_df.faturamento_total / lojas_df.transacoes_total
 
 plt.style.available
+
+((lojas_df.dinheiro + lojas_df.debito + lojas_df.deposito + lojas_df.transferencia + lojas_df.credito + lojas_df.cheque + lojas_df.crediario) == 1).value_counts()
+
+pag_set = lojas_df[((lojas_df.dinheiro + lojas_df.debito + lojas_df.deposito + lojas_df.transferencia + lojas_df.credito + lojas_df.cheque + lojas_df.crediario) == 1)]
+
+pag_set["digital"] = pag_set.credito + pag_set.debito
+pag_set["analogico"] = pag_set.dinheiro + pag_set.deposito + pag_set.transferencia + pag_set.cheque + pag_set.crediario
