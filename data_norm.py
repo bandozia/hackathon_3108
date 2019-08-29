@@ -65,3 +65,5 @@ lojas_df['periodo_3'] = lojas_df.encrypted_cnpj.apply(lambda x : count_sazon(x, 
 lojas_df['periodo_4'] = lojas_df.encrypted_cnpj.apply(lambda x : count_sazon(x, per_loja_4))
 
 lojas_df.to_csv("data/lojas_enc.csv", index=False)
+
+(lojas_df.produtos_vendidos / lojas_df.transacoes_total).mean()
