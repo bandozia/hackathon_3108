@@ -98,3 +98,11 @@ pag_set = lojas_df[((lojas_df.dinheiro + lojas_df.debito + lojas_df.deposito + l
 
 pag_set["digital"] = pag_set.credito + pag_set.debito
 pag_set["analogico"] = pag_set.dinheiro + pag_set.deposito + pag_set.transferencia + pag_set.cheque + pag_set.crediario
+
+import random
+
+clusters_features = pd.DataFrame(columns=['faturamento_medio','ticket_medio','trans_medio'])
+for i in range(0, 4):
+    clusters_features = clusters_features.append({"faturamento_medio": random.randint(10,50),"ticket_medio": 5,"trans_medio": 40}, ignore_index=True)
+
+clusters_features
