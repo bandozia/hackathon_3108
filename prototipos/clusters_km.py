@@ -19,6 +19,7 @@ subset = (subset - subset.mean()) / subset.std()
 
 X = np.column_stack([subset.produtos_vendidos,subset.transacoes_total,subset.faturamento_total])
 
+
 sqr_dist = []
 for i in range(1,15):
     kmeans = KMeans(init='k-means++', n_clusters=i)

@@ -29,12 +29,8 @@ def load_profile_clustering():
     return km
 
 
-def evaluate_model(model, csv_path, crop=None):
+def evaluate_model(model, csv_path):
     df = pd.read_csv(csv_path)
-
-    if crop is not None:
-        df = df[(df["faturamento_total"] > crop[0]) & (df["faturamento_total"] < crop[1])]
-
     subset = df[["produtos_vendidos", "transacoes_total", "faturamento_total", "periodo_0", "periodo_1",
                  "periodo_2", "periodo_3", "periodo_4"]].dropna()
 
@@ -62,6 +58,8 @@ def evaluate_model(model, csv_path, crop=None):
     cluster_norm = clusters_features / clusters_features.sum()
     print("silhouette_score: %s" % m_score)
     print(cluster_norm.std())
+
+    # todo ver qual a mehor forma de retornar isso
     return np.array(cluster_norm.std() * m_score)
 
 
@@ -89,7 +87,7 @@ if __name__ == "__main__":
         train_profile_clustering(args.train_path, args.k)
         print("modelo treinado.")
     elif args.eval_path is not None:
-        model_score = evaluate_model(load_profile_clustering(), args.eval_path, args.crop)
+        model_score = evaluate_model(load_profile_clustering(), args.eval_path)
         print(model_score)
     elif args.data_csv is not None:
         df = pd.read_csv(args.data_csv)

@@ -8,7 +8,7 @@ import re
 print("carregando df lojas...")
 lojas_df = pd.read_csv("data/stores_details.csv")
 print("carregando df transacoes...")
-trans_df = pd.read_csv("data/raw_part-00000.csv", error_bad_lines=False)
+trans_df = pd.read_csv("data/part-00000-a05a0d4b-2b10-4dbb-b6ea-2eec0a3371f7-c000.csv", error_bad_lines=False)
 for f in glob.glob("data/separados/*.{}".format("csv")):
     trans_df = trans_df.append(pd.read_csv(f, error_bad_lines=False),ignore_index=True)
 
