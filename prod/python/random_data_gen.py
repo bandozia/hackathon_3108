@@ -5,16 +5,17 @@ import argparse
 
 
 def generate_data(n):
-    df = pd.DataFrame(columns=["id", "produtos_vendidos", "faturamento_total", "transacoes_total"])
-    tbase = pd.read_csv("../../data/lojas_enc.csv")
-    pmin = tbase.produtos_vendidos.min()
-    pmax = tbase.produtos_vendidos.max()
-    d = round((tbase.produtos_vendidos / tbase.transacoes_total).max())
+    df = pd.DataFrame(columns=["id", "produtos_vendidos", "faturamento_total", "transacoes_total", "periodo_0", "periodo_1", "periodo_2", "periodo_3", "periodo_4"])
     for i in range(0, n):
-        p = random.randint(pmin, pmax)
-        pv = random.randint(1, 10000)
-        t = pv / random.randint(1, d)
-        df = df.append({"id": i, "produtos_vendidos": pv, "faturamento_total": p * pv, "transacoes_total": t}, ignore_index=True)
+        p = random.randint(10, 1000)
+        pv = random.randint(1, 100000)
+        t = pv / random.randint(1, 50)
+        pers = np.random.dirichlet(np.ones(5), size=1)
+        df = df.append({
+            "id": i, "produtos_vendidos": pv, "faturamento_total": p * pv, "transacoes_total": t,
+            "periodo_0": pers[:, 0][0] * t, "periodo_1": pers[:, 1][0] * t, "periodo_2": pers[:, 2][0] * t,
+            "periodo_3": pers[:, 3][0] * t, "periodo_4": pers[:, 4][0] * t
+        }, ignore_index=True)
 
     return df
 
